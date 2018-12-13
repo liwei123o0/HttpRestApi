@@ -18,6 +18,8 @@ Including another URLconf
 """
 from django.conf.urls import url
 from django.contrib import admin
+from app.views import *
+
 import xadmin
 xadmin.autodiscover()
 # version模块自动注册需要版本控制的 Model
@@ -27,4 +29,6 @@ xadmin.autodiscover()
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^xadmin/', xadmin.site.urls),
+    url(r'^analysis/api/v1/$', analysis_solr_api)
+
 ]

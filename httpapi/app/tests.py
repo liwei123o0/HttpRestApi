@@ -1,4 +1,5 @@
 from django.test import TestCase
 import uuid
+import os
 # Create your tests here.
-print uuid.uuid4().hex
+print os.path.dirname(__file__)

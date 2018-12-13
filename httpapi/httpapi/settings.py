@@ -17,7 +17,7 @@ import os
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-
+Solr_URL = 'http://192.168.10.173:8983/solr/yqmysql'
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.9/howto/deployment/checklist/
 
@@ -41,9 +41,19 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'xadmin',
     'crispy_forms',
-    'app'
-    # 'reversion',
+    'app',
+    # 'rest_framework',
+    # 'rest_framework.authtoken'
 ]
+
+# REST_FRAMEWORK = {
+#     'DEFAULT_AUTHENTICATION_CLASSES': (
+#         'rest_framework.authentication.BasicAuthentication',
+#         'rest_framework.authentication.SessionAuthentication',
+#         'rest_framework.authentication.TokenAuthentication',
+#
+#     )
+# }
 
 MIDDLEWARE_CLASSES = [
     'django.middleware.security.SecurityMiddleware',
@@ -117,7 +127,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/1.9/topics/i18n/
 
-LANGUAGE_CODE = 'zh-hans'
+LANGUAGE_CODE = 'zh-Hans'
 
 TIME_ZONE = 'Asia/Shanghai'
 
@@ -133,3 +143,14 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+
+#邮件配置
+EMAIL_HOST = 'smtp.163.com'                   #SMTP地址
+EMAIL_PORT = 25                                 #SMTP端口
+DEFAULT_FROM_EMAIL = 'liweijavakf@163.com'       #用户收到邮件显示的邮箱
+EMAIL_HOST_USER = 'liweijavakf@163.com'       #我自己的邮箱
+EMAIL_HOST_PASSWORD = 'liwei429'                  #我的邮箱密码
+EMAIL_SUBJECT_PREFIX = u'[情感分析维护管理系统]'            #为邮件Subject-line前缀,默认是'[django]'
+EMAIL_USE_TLS = True                             #与SMTP服务器通信时，是否启动TLS链接(安全链接)。默认是false
+#管理员站点
+SERVER_EMAIL = 'liweijavakf@163.com'
