@@ -14,7 +14,7 @@ from .models import *
 def analysis_solr_api(request):
     area = request.GET.get('area', 0)
     credit_quality = request.GET.get('quality', 0)
-    rows = request.GET.get('rows', 0)
+    rows = request.GET.get('rows', 10)
     if area == 0 or credit_quality == 0 or rows == 0:
         return JsonResponse({"msg": "error", "data": u"请求参数未填写正确！"})
     q_dict = {'wt': 'json', "rows": rows}
