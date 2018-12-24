@@ -3,9 +3,9 @@
 from django.apps import AppConfig
 
 
-class AppConfig(AppConfig):
-    name = u'app'
-    verbose_name = u"维护系统"
+class WHConfig(AppConfig):
+    name = 'app'
+    verbose_name = "维护系统"
 
 # class UsersConfig(AppConfig):
 #     name = 'app'
