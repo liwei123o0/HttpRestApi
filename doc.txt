@@ -1,0 +1,7 @@
+接口api
+参数：
+area：地域
+quality：指标词
+quarter：季度
+--
+http://127.0.0.1:8000/analysis/api/v1/?area=%E8%A5%BF%E5%AE%89&quality=ddaa5a3b0c844e69a9305ff86cb138dc&quarter=0
