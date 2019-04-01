@@ -29,5 +29,7 @@ xadmin.autodiscover()
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'', xadmin.site.urls),
-    url(r'^analysis/api/v1/$', analysis_solr_api)
+    url(r'^analysis/api/v1/$', analysis_solr_api),
+    url(r'^index/$', index_bases),
+    url(r'^index_serach/$', index_serach)
 ]

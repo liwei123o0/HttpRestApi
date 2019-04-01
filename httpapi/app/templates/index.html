@@ -1,0 +1,86 @@
+{% extends  "base.html" %}
+{% block body %}
+<div class="center-block">
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="input-group">
+                <input id="serach_name" type="text" class="form-control" placeholder="检索表达式">
+                <span class="input-group-btn">
+        <button class="btn btn-default" type="button" onclick="search()">Go!</button>
+      </span>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="list-group">
+                <a href="#" class="list-group-item disabled">
+                    查询数:{{num}}
+                </a>
+                {% for data in datas %}
+                <a href="{{data.url}}" class="list-group-item">{{data.title}}</a>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12">
+            <nav aria-label="Page navigation">
+                <ul class="pagination">
+                    <li>
+                        <a href="#" aria-label="Previous">
+                            <span aria-hidden="true">&laquo;</span>
+                        </a>
+                    </li>
+                    <!--                    {% for data in datas %}-->
+                    <!--                    <li><a href="#">{{data.title}}</a></li>-->
+                    <!--                    {% endfor %}-->
+                    <li>
+                        <a href="#" aria-label="Next">
+                            <span aria-hidden="true">&raquo;</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+</div>
+{% endblock %}
+{% block script %}
+<script>
+    function search() {
+        var value = $('#serach_name').val();
+        if (value != "") {
+            $.ajax({
+                "url": "http://127.0.0.1:8000/index_serach/",
+                "data": "serch=" + value,
+                "type": "GET",
+                "dataType": "json",
+                "success": function (obj) {
+                    // for (var i=0;i<obj.data.length;i++){
+                    alert("hello word!")
+                    // }
+                }
+            })
+        } else {
+            alert("请传入参数！");
+            return -1;
+        }
+    }
+</script>
+{% endblock %}
+
+{% block css %}
+<style type="text/css">
+    .center-block {
+        display: block;
+        margin: auto;
+        /*margin-right: auto;*/
+    }
+
+    .element {
+    . center-block();
+    }
+</style>
+{% endblock %}
+

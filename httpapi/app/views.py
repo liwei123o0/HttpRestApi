@@ -3,6 +3,7 @@
 
 import pysolr
 from django.http import JsonResponse
+from django.shortcuts import render
 from httpapi.settings import Solr_URL
 
 from .models import *
@@ -34,7 +35,6 @@ def analysis_solr_api(request):
     area_re = area_re + result.area_re
     word_re = result.word_re
     q = '((title:(('"%s"')AND('"%s"')))AND(content:(('"%s"')AND('"%s"'))))' % (area_re, word_re, area_re, word_re)
-    print q
     try:
         solr = pysolr.Solr(Solr_URL, timeout=10)
     except:
@@ -46,3 +46,26 @@ def analysis_solr_api(request):
     keyword = raw_response[0]['responseHeader']['params']['q']
     QTime = raw_response[0]['responseHeader']['QTime']
     return JsonResponse({"msg": "sccuess", "QTime": QTime, "numFound": numFound, "keyword": keyword, "data": data})
+
+
+def index_bases(request):
+    return render(request, "index.html")
+
+
+def index_serach(request):
+    serch = request.GET.get('serch', "")
+    rows = request.GET.get('rows', 10)
+    q = '((title:('"%s"')) OR (content:('"%s"')))' % (serch, serch)
+    q_dict = {'wt': 'json', "rows": rows}
+    try:
+        solr = pysolr.Solr(Solr_URL, timeout=10)
+    except:
+        return JsonResponse({"msg": "error", "data": u"Solr请求超时..."})
+    results = solr.search(q, **q_dict)
+    numFound = results.hits
+    data = results.docs
+    raw_response = results.raw_response,
+    keyword = raw_response[0]['responseHeader']['params']['q']
+    QTime = raw_response[0]['responseHeader']['QTime']
+    sorl_dict = {"msg": "sccuess", "QTime": QTime, "numFound": numFound, "keyword": keyword, "data": data}
+    return render(request, "index.html", {"datas": data})
