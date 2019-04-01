@@ -5,8 +5,4 @@ from django.apps import AppConfig
 
 class WHConfig(AppConfig):
     name = 'app'
-    verbose_name = "维护系统"
-
-# class UsersConfig(AppConfig):
-#     name = 'app'
-#     verbose_name = u"维护系统"
+    verbose_name = u"关键词维护"

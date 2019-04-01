@@ -11,22 +11,25 @@
 
 """
 import xadmin
-from .models import *
 from xadmin import views
 from xadmin.views.website import LoginView
+
+from .models import *
+
 
 class LoginViewAdmin(LoginView):
     title = u'情感分析维护管理系统'
 
-class BaseSetting(object):
-    # 开启主题功能
-    enable_themes = True
-    use_bootswatch = True
+
+# class BaseSetting(object):
+#     开启主题功能
+# enable_themes = True
+# use_bootswatch = True
 
 class GlobalSetting(object):
     site_title = u'情感分析维护管理系统'   #设置头标题
     site_footer = u'Copyright © 2018 西部资信'  #设置脚标题
-    menu_style = 'accordion'
+    # menu_style = u'accordion'
 
 
 
@@ -56,7 +59,7 @@ class ClassReKeyWordadmin(object):
 
 
 xadmin.site.register(LoginView, LoginViewAdmin)
-xadmin.site.register(views.BaseAdminView, BaseSetting)
+# xadmin.site.register(views.BaseAdminView, BaseSetting)
 xadmin.site.register(views.CommAdminView, GlobalSetting)
 
 

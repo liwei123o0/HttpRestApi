@@ -2,9 +2,27 @@
 # coding: utf-8
 
 from __future__ import unicode_literals
-from django.db import models
+
 import uuid
 from datetime import datetime
+
+from django.db import models
+
+
+class AreaReKeyWord(models.Model):
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    area = models.CharField(verbose_name=u'地区', max_length=50, db_index=True)
+    word_re = models.TextField(verbose_name=u'区域表达式')
+    flag = models.BooleanField(verbose_name=u'启用状态', default=True)
+    add_time = models.DateField(verbose_name=u'添加时间', default=datetime.now)
+    create_user = models.CharField(verbose_name=u'创建者', max_length=50)
+
+    class Meta:
+        verbose_name = u'区域表达式维护'
+        verbose_name_plural = u'区域表达式维护'
+
+    def __str__(self):
+        return self.area
 
 
 class CREDIT_QUALITY_INDEX(models.Model):
@@ -12,7 +30,8 @@ class CREDIT_QUALITY_INDEX(models.Model):
     id = models.UUIDField(verbose_name=u'指标ID', primary_key=True, max_length=32)
     template_gid = models.UUIDField(verbose_name=u'指标分类ID', max_length=32)
     template_id = models.UUIDField(verbose_name=u'指标模板ID', max_length=32)
-    word_re = models.TextField(verbose_name=u'指标关键词表达式')
+    credit_area = models.ForeignKey(AreaReKeyWord, verbose_name=u'指标对应区域',
+                                    on_delete=models.CASCADE, blank=True, null=True)
     add_time = models.DateField(verbose_name=u'添加时间', default=datetime.now)
     create_user = models.CharField(verbose_name=u'创建者', max_length=50)
 
@@ -56,22 +75,6 @@ class StopKeyWord(models.Model):
 
     def __str__(self):
         return self.word
-
-
-class AreaReKeyWord(models.Model):
-    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    area = models.CharField(verbose_name=u'地区', max_length=50, db_index=True)
-    word_re = models.TextField(verbose_name=u'区域表达式')
-    flag = models.BooleanField(verbose_name=u'启用状态', default=True)
-    add_time = models.DateField(verbose_name=u'添加时间', default=datetime.now)
-    create_user = models.CharField(verbose_name=u'创建者', max_length=50)
-
-    class Meta:
-        verbose_name = u'区域表达式维护'
-        verbose_name_plural = u'区域表达式维护'
-
-    def __str__(self):
-        return self.area
 
 
 class SolrReKeyWord(models.Model):

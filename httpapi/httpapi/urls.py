@@ -16,11 +16,11 @@ Including another URLconf
     2. Import the include() function: from django.conf.urls import url, include
     3. Add a URL to urlpatterns:  url(r'^blog/', include(blog_urls))
 """
+import xadmin
+from app.views import *
 from django.conf.urls import url
 from django.contrib import admin
-from app.views import *
 
-import xadmin
 xadmin.autodiscover()
 # version模块自动注册需要版本控制的 Model
 # from xadmin.plugins import xversion
@@ -28,7 +28,6 @@ xadmin.autodiscover()
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^xadmin/', xadmin.site.urls),
+    url(r'', xadmin.site.urls),
     url(r'^analysis/api/v1/$', analysis_solr_api)
-
 ]
